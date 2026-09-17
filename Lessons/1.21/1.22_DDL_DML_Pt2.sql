@@ -96,5 +96,5 @@ where job_posted_date < '2024-01-01';
 
 truncate table staging.job_posting_flat;
 
--- 8:17
+
 
