@@ -112,4 +112,3 @@ order by job_count desc;
 
 -- .read Lessons/1.24/priority_jobs_snapshot.sql
 
--- 9:34
