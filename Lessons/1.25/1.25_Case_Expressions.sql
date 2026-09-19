@@ -83,3 +83,4 @@ select
     end as salary_bucket
 from salaries
 limit 10;
+
