@@ -192,4 +192,40 @@ from flat_skills
 group by all
 order by median_salary desc;
 
--- 12:31
+-- buid a flat skill & type table for co-workers to access job_titles, salary info, skills, and type in one table
+
+create or replace temp table job_skills_array_struct as
+select 
+    jpf.job_id,
+    jpf.job_title_short,
+    jpf.salary_year_avg,
+    array_agg(
+        struct_pack(
+            skill_type := sd.type,
+            skill_name := sd.skills 
+        )
+    ) as skills_type
+from job_postings_fact as jpf
+left join skills_job_dim as sjd 
+    on jpf.job_id = sjd.job_id
+left join skills_dim as sd 
+    on sd.skill_id = sjd.skill_id
+group by all;
+
+-- from the prespective of a data analyst , analyze the median salary per type of skill
+
+with flat_skills as (
+    select 
+        job_id,
+        job_title_short,
+        salary_year_avg,
+        unnest(skills_type). skill_type as skill_type,
+        unnest(skills_type). skill_name as skill_name
+    from 
+        job_skills_array_struct
+)
+select 
+    skill_type,
+    median(salary_year_avg) as median_salary
+from flat_skills
+group by all;
