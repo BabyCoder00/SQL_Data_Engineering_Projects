@@ -12,7 +12,7 @@ create table company_dim (
 
 create table skills_dim (
     skill_id        integer     primary key,
-    skill           varchar,
+    skills           varchar,
     type            varchar
 );
 
@@ -24,6 +24,8 @@ create table job_postings_fact (
     job_location                varchar,
     job_via                     varchar,
     job_schedule_type           varchar,
+    job_work_from_home          varchar,--
+    search_location             varchar,--
     job_posted_date             timestamp,
     job_no_degree_mention       boolean,
     job_health_insurance        boolean,
@@ -45,3 +47,4 @@ create table skills_job_dim (
 select table_name
 from information_schema.tables
 where table_schema = 'main';
+
