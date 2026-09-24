@@ -43,3 +43,10 @@ SELECT skill_id, job_id
 FROM read_csv('https://storage.googleapis.com/sql_de/skills_job_dim.csv', 
     AUTO_DETECT=true,
     header =true);
+
+
+SELECT
+    (SELECT COUNT(*) FROM company_dim) AS company_rows,
+    (SELECT COUNT(*) FROM skills_dim) AS skill_rows,
+    (SELECT COUNT(*) FROM job_postings_fact) AS job_rows,
+    (SELECT COUNT(*) FROM skills_job_dim) AS job_skill_rows;
