@@ -1,3 +1,4 @@
+-- duckdb dw_marts.duckdb -c ".read build_dw_marts.sql"
 
 select '=== Loading company_dim Table ===' as info;
 
@@ -50,3 +51,17 @@ SELECT
     (SELECT COUNT(*) FROM skills_dim) AS skill_rows,
     (SELECT COUNT(*) FROM job_postings_fact) AS job_rows,
     (SELECT COUNT(*) FROM skills_job_dim) AS job_skill_rows;
+
+select '=== Company Dimension Sample ===' as info;
+select * from company_dim limit 5;
+
+select '=== Company Dimension Sample ===' as info;
+select * from skills_dim limit 5;
+
+select '=== Company Dimension Sample ===' as info;
+select * from job_postings_fact limit 5;
+
+select '=== Company Dimension Sample ===' as info;
+select * from skills_job_dim limit 5;
+
+
